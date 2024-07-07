@@ -31,8 +31,14 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-23.11
 
+      - name: debug
+        run: ls -a .
+
       - name: Compile ${{matrix.renderer}} port on ${{matrix.os}}
         run: nix-shell build-scripts/shell.nix --run 'make all NYXT_RENDERER=${{matrix.renderer}}'
+
+      - name: debug
+        run: ls -a .
 
       - name: Test ${{matrix.renderer}} port on ${{matrix.os}}
         env:
